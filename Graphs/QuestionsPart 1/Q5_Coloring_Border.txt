@@ -1,0 +1,38 @@
+1034. Coloring A Border (Medium)
+
+class Solution {
+public:
+    vector<int>internal;
+    void dfs(vector<vector<int>>&grid,int row,int col,int color,int orignal){
+        if(row<0 || col<0 || row>=grid.size() || col>=grid[0].size()) return ;
+        if(grid[row][col]!=orignal) return;
+        grid[row][col]=-color;
+    
+        dfs(grid,row+1,col,color,orignal);
+        dfs(grid,row-1,col,color,orignal);
+        dfs(grid,row,col+1,color,orignal);
+        dfs(grid,row,col-1,color,orignal);
+
+        if(!(row==0 || col==0 || row==grid.size()-1 || col==grid[0].size()-1 || grid[row+1][col]!=-color || grid[row-1][col]!=-color || grid[row][col+1]!=-color || grid[row][col-1]!=-color)){
+            internal.push_back(row);
+            internal.push_back(col);
+        }
+
+    }
+    vector<vector<int>> colorBorder(vector<vector<int>>& grid, int row, int col, int color) {
+        int orignal = grid[row][col];
+        dfs(grid,row,col,color,orignal);
+        for(int i=0;i<internal.size();i+=2){
+            grid[internal[i]][internal[i+1]] = orignal;
+        }
+
+        for(int i=0;i<grid.size();i++){
+            for(int j=0;j<grid[0].size();j++){
+                if(grid[i][j]<0){
+                    grid[i][j] = -grid[i][j];
+                }
+            }
+        }
+        return grid;
+    }
+};

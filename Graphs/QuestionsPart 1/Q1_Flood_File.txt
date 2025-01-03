@@ -1,0 +1,30 @@
+733. Flood Fill (Easy)
+
+class Solution {
+public:
+    void dfs(vector<vector<int>>&image, int curRow, int curCol, int newColor, int initialColor ){
+        int totalRow = image.size();
+        int totalCol = image[0].size();
+
+        if(curRow<0 || curCol<0 ||  curRow>=totalRow || curCol>=totalCol){  // out off bond
+            return;
+        }
+
+        if(image[curRow][curCol]!=initialColor) return; // current block
+        else{
+            image[curRow][curCol]=newColor;
+        }
+        // OR image[curRow][curCol]=newColor
+
+        dfs(image,curRow+1,curCol,newColor,initialColor); // down
+        dfs(image,curRow-1,curCol,newColor,initialColor); // up
+        dfs(image,curRow,curCol+1,newColor,initialColor); // right 
+        dfs(image,curRow,curCol-1,newColor,initialColor); // left
+    }
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {  
+        if(image[sr][sc]==color) return image; // if there is no chnage in the color of the grid
+
+        dfs(image,sr,sc,color,image[sr][sc]);
+        return image;
+    }
+};

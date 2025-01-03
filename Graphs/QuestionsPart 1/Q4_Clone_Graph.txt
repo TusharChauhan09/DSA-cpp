@@ -1,0 +1,49 @@
+133. Clone Graph (Medium)
+
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    vector<Node*> neighbors;
+    Node() {
+        val = 0;
+        neighbors = vector<Node*>();
+    }
+    Node(int _val) {
+        val = _val;
+        neighbors = vector<Node*>();
+    }
+    Node(int _val, vector<Node*> _neighbors) {
+        val = _val;
+        neighbors = _neighbors;
+    }
+};
+*/
+
+class Solution {
+public:
+    void dfs(Node* node,Node* clone,vector<Node*>&NodeRegister){
+        for(auto neighbor: node->neighbors){
+
+            if(NodeRegister[neighbor->val]==nullptr){
+                Node* newNode = new Node(neighbor->val);
+                NodeRegister[newNode->val]=newNode;
+
+                clone->neighbors.push_back(newNode);
+                dfs(neighbor,newNode,NodeRegister);
+            }
+            else{
+                clone->neighbors.push_back(NodeRegister[neighbor->val]);    // when all the nodes have triversed and only the 
+            }                                                               // the connections are left to made
+        }
+    }
+    Node* cloneGraph(Node* node) {
+        if(node==nullptr) return nullptr;
+        vector<Node*>NodeRegister(110,nullptr);
+        Node* clone = new Node(node->val);
+        NodeRegister[clone->val] = clone;
+        dfs(node,clone,NodeRegister);
+        return clone;  
+    }
+};

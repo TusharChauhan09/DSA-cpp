@@ -1,0 +1,60 @@
+417. Pacific Atlantic Water Flow (Medium)
+
+class Solution {
+public:
+    vector<vector<int>>dir{{1,0},{-1,0},{0,1},{0,-1}}; // i,j=> (i+1,j) , (i-1,j), (i,j+1), (i,j-1)
+
+    vector<vector<int>>bfs(vector<vector<int>>& heights,queue<pair<int,int>>&q,int row,int col){
+        vector<vector<int>>visited(row,vector<int>(col,0));
+
+        while(!q.empty()){
+            auto cell = q.front();
+            q.pop();
+            int i = cell.first;
+            int j = cell.second;
+            visited[i][j]=1;
+            for(int d=0;d<4;d++){ // only 4 neighbours
+                int newRow = i + dir[d][0];
+                int newCol = j + dir[d][1];
+                if(newRow<0 || newCol<0 ||newRow>=row || newCol>=col) continue;
+                if(visited[newRow][newCol]==1) continue;
+                if(heights[newRow][newCol]>=heights[i][j]) q.push({newRow,newCol});   //neighbour>=current => ocean to cell
+            } 
+        }
+        return visited;
+    }
+
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        int row = heights.size();
+        int col = heights[0].size();
+        queue<pair<int,int>>pasific;
+        queue<pair<int,int>>atlantic;
+
+        //multi-source bfs
+        for(int i=0;i<row;i++){
+            pasific.push({i,0});
+            atlantic.push({i,col-1});
+        }
+        for(int j=0;j<col;j++){
+            pasific.push({0,j});
+            atlantic.push({row-1,j});
+        }
+        // for(int j=1;j<col;j++){
+        //     pasific.push({0,j});
+        // }
+        // for(int j=0;j<col-1;j++){
+        //     atlantic.push({row-1,j});
+        // }
+
+        vector<vector<int>>p = bfs(heights,pasific,row,col);
+        vector<vector<int>>a = bfs(heights,atlantic,row,col);
+
+        vector<vector<int>>result;
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                if(a[i][j]&&p[i][j]) result.push_back({i,j});
+            }
+        }
+        return result;
+    }
+};
