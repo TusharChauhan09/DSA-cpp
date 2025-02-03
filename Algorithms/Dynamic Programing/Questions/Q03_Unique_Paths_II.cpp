@@ -1,7 +1,5 @@
 // 63. Unique Paths II     (Medium)
 
-// 62. Unique Paths      (Medium)
-
 #include<iostream>
 #include<vector>
 #include<algorithm>
