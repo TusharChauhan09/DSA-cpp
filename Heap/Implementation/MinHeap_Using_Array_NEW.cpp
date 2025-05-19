@@ -31,7 +31,7 @@ public:
         cout<<arr[index]<<" is inserted into Heap\n";
     }
 
-    // 
+    // Heapify Down (comaprision with children)
     void Heapify(int index){
         int largest = index;
         int left = 2*index + 1;

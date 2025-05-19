@@ -31,6 +31,7 @@ void BucketSort(vector<float>&arr , int n){
     //sort individual buckets
     for(int i=0;i<n;i++){
         if(!bucket[i].empty()){
+            // any sorting algorithm
             sort(bucket[i].begin(),bucket[i].end());
         }
     }

@@ -20,7 +20,7 @@ void HeapifyDown(int arr[],int size,int index){
 }
 
 void buildMaxHeap(int arr[],int size){
-    for(int i=size/2+1;i>=0;i--){
+    for(int i=size/2-1;i>=0;i--){
         HeapifyDown(arr,size,i);
     }
 }
