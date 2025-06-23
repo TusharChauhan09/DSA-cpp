@@ -43,15 +43,45 @@ void LevelOrder_space(Node* root){
     }
 }
 
-Node* Construct_LevelOrder(vector<int>v){
+// Node* Construct_LevelOrder(vector<int>v){
+//     queue<Node*>q;
+//     Node* root = new Node(v[0]);
+//     q.push(root);
+//     int i=1;
+//     int j=2;
+
+//     while(q.size()>0 && i<v.size()){
+//         Node* temp = q.front();
+//         q.pop();
+//         Node* l;
+//         Node* r;
+
+//         if(v[i]!=INT_MIN) l = new Node(v[i]);
+//         else l = nullptr;
+
+//         if(j!=v.size() && v[j]!=INT_MIN) r = new Node(v[j]);
+//         else r = nullptr;
+
+//         temp->left=l;
+//         temp->right=r;
+
+//         if(l!=nullptr) q.push(l);
+//         if(r!=nullptr) q.push(r);
+
+//         i+=2; j+=2;
+//     }
+    
+//     return root;
+// }
+
+Node* Construct_LevelOrder(vector<int>v){    // for construction only 
     queue<Node*>q;
     Node* root = new Node(v[0]);
     q.push(root);
-    int i=1;
-    int j=2;
 
-    while(q.size()>0 && i<v.size()){
-        Node* temp = q.front();
+    int i=1;
+    while(!q.empty() && i<v.size()){
+        Node* cur = q.front();
         q.pop();
         Node* l;
         Node* r;
@@ -59,18 +89,19 @@ Node* Construct_LevelOrder(vector<int>v){
         if(v[i]!=INT_MIN) l = new Node(v[i]);
         else l = nullptr;
 
-        if(j!=v.size() && v[j]!=INT_MIN) r = new Node(v[j]);
+        int j = i+1;
+        if(j<v.size() && v[j]!=INT_MIN) r = new Node(v[j]);
         else r = nullptr;
 
-        temp->left=l;
-        temp->right=r;
+        cur->left = l;
+        cur->right = r;
+        
+        if(l) q.push(l);
+        if(r) q.push(r);
 
-        if(l!=nullptr) q.push(l);
-        if(r!=nullptr) q.push(r);
-
-        i+=2; j+=2;
+        i+=2;
     }
-    
+
     return root;
 }
 
