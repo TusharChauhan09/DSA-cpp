@@ -33,23 +33,23 @@ public:
 
     // Heapify Down (comaprision with children)
     void Heapify(int index){
-        int largest = index;
+        int smallest = index; // largest
         int left = 2*index + 1;
         int right = 2*index + 2;
 
         // largest will store the index of the element which
         // is greater b/w parent , left child ,right child
 
-        if(left<size && arr[largest]>arr[left]){
-            largest = left;
+        if(left<size && arr[smallest]>arr[left]){
+            smallest = left;
         } 
-        if(right<size && arr[largest]>arr[right]){
-            largest = right;
+        if(right<size && arr[smallest]>arr[right]){
+            smallest = right;
         }
         
-        if(largest!=index){
-            swap(arr[index],arr[largest]);
-            Heapify(largest);
+        if(smallest!=index){
+            swap(arr[index],arr[smallest]);
+            Heapify(smallest);
         }
         
     }
@@ -81,9 +81,20 @@ public:
 
 };
 int main(){
-    int arr[] = {};
-    //MaxHeap h(6);
+    MinHeap pq(10);
+    pq.insert(10);  // push
+    pq.insert(20); 
+    pq.insert(30);
+    pq.insert(40);
+    pq.insert(45);
+    pq.insert(4);    // push + rearrangment 
+
+    pq.deletion();   //pop
+    pq.display();
 
 
+    pq.insert(100);
+    pq.display();
+    
     return 0;
 }
