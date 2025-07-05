@@ -118,8 +118,9 @@ void LevelOrder_space(Node* root){
 
 int main(){
     // construct
-    vector<int>v = {1,2,3,4,5,INT_MIN,6,7,INT_MIN,8,INT_MIN,9,10,INT_MIN,11,INT_MIN,12,INT_MIN,13,INT_MIN,14,15,16,INT_MIN,17,INT_MIN,INT_MIN,18,INT_MIN,19,INT_MIN,INT_MIN,INT_MIN,20,21,22,23,INT_MIN,24,25,26,INT_MIN,27,INT_MIN,28};
+    // vector<int>v = {1,2,3,4,5,INT_MIN,6,7,INT_MIN,8,INT_MIN,9,10,INT_MIN,11,INT_MIN,12,INT_MIN,13,INT_MIN,14,15,16,INT_MIN,17,INT_MIN,INT_MIN,18,INT_MIN,19,INT_MIN,INT_MIN,INT_MIN,20,21,22,23,INT_MIN,24,25,26,INT_MIN,27,INT_MIN,28};
     // vector<int>v = {1, 2, 3, 4, 5, 6, INT_MIN, INT_MIN, 7, 8, 9, 10};
+    vector<int>v = {1,INT_MIN,87,INT_MIN,64,INT_MIN,INT_MIN};
     Node* root = Construct_LevelOrder(v);
 
     LevelOrder_space(root);
