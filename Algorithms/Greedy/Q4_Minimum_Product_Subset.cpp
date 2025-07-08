@@ -23,11 +23,12 @@ int minProduct(vector<int>&arr){
     }
     else{               // -ve exit
         if(cn%2==0){    // even
-            sort(arr.begin(),arr.end());
+            sort(arr.begin(),arr.end()); // skip the largest -ve number 
             for(int i=0;i<cn-1;i++){
                 result *= arr[i];
             }
-            for(int i=cn;i<arr.size();i++){
+            for(int i=cn;i<arr.size();i++){  // skip the largest -ve number
+                if(arr[i]==0) continue;
                 result *= arr[i];
             }
         }
