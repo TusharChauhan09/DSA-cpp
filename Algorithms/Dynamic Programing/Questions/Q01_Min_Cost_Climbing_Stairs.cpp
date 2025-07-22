@@ -5,6 +5,20 @@
 #include<algorithm>
 using namespace std;
 
+// Recursion 
+class Solution {
+public:
+    int costCal(vector<int>& cost, int cur) {
+        if (cur >= cost.size()) return 0; 
+        int oneStep = costCal(cost, cur + 1);
+        int twoStep = costCal(cost, cur + 2);
+        return cost[cur] + min(oneStep, twoStep);
+    }
+    int minCostClimbingStairs(vector<int>& cost) {
+        return min(costCal(cost, 0), costCal(cost, 1));
+    }
+};
+
 // Tabulation
 class Solution {
 public:

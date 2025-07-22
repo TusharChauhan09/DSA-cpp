@@ -23,16 +23,18 @@ vector<int>dp;
 
 // tab
 int tab(int n) {
-    vector<int> dp(n + 1, inf); 
-    dp[0] = 0; 
-
-    for (int i = 1; i <= n; i++) {
-        vector<int> digits = getDigits(i);
-        for (int d : digits) {
-            if (i - d >= 0) { // Ensure valid index
-                dp[i] = min(dp[i], dp[i - d] + 1);
-            }
+    vector<int>dpt(n+1,-1);
+    dp[0] = 0;
+    for(int i=1;i<10;i++){
+        dp[i]=1;
+    }
+    for(int i=10;i<=n;i++){
+        int result = INT_MAX;
+        vector<int>digit = getDigits(n);
+        for(int i=0;i<digit.size();i++){
+            result = min(result,dp[n-dp[i]]);
         }
+        dp[n] = 1+ result; 
     }
     return dp[n];
 }
