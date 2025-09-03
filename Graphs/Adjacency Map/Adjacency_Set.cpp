@@ -4,14 +4,14 @@
 #include<unordered_set>
 using namespace std;
 
-void add(vector<unordered_set<int,int>> &graph,int src,int des, bool undir=true){
+void add(vector<unordered_set<int>> &graph,int src,int des, bool undir=true){
     graph[src].insert(des);
     if(undir){
         graph[des].insert(src);
     }
 }
 
-void display(vector<unordered_set<int,int>> &graph){
+void display(vector<unordered_set<int>> &graph){
     for(int i=0;i<graph.size();i++){
         cout<<i<<" -> ";
         for(auto j: graph[i]){
@@ -27,15 +27,13 @@ int main(){
     int e;   // edge
     cin>>e;
 
-    vector<unordered_set<int,int>> graph(v,unordered_set<int,int>());   // Adjacency Map
+    vector<unordered_set<int>> graph(v,unordered_set<int>());   // Adjacency Map
 
     while(e--){
         int src;
         int des;
-        int weight;
         cin>>src;
         cin>>des;
-        cin>>weight;
         add(graph,src,des);  // false (for directed graph) 
     }
 

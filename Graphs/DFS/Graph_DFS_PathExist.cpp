@@ -43,7 +43,7 @@ bool DFS(vector<vector<int>>graph ,unordered_set<int>&visted,int current, int en
 // }
 
 
-bool anyPath(vector<vector<int>>graph ,unordered_set<int>&visted/*vector<int>visted*/, int src, int des){
+bool anyPath(vector<vector<int>>graph ,unordered_set<int>&visted/*vector<int>&visted*/, int src, int des){
     return DFS(graph,visted,src,des);
 }
 
